@@ -50,7 +50,8 @@ def read_df():
                                             'BUILDING IMPROVEMENT',
                                             'MACHINERY',
                                             'FACTORY EQUIPMENT'])]
-masDat=read_df()    
+masDat=read_df()
+st.success('Read Data Successfully....')
 
 # PLOT DESCRIPTION
 @st.cache(suppress_st_warning=True)

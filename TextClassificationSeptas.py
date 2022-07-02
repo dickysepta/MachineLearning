@@ -16,6 +16,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import cross_val_score
 warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action="ignore", category=UserWarning)
+print(pd)
 
 st.set_page_config(page_title='TextClassificationSeptas')
 st.title("!! TEXT CLASSIFICATION FOR FREE !!")

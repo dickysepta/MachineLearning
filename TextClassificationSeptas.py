@@ -51,6 +51,8 @@ def read_df():
                                             'MACHINERY',
                                             'FACTORY EQUIPMENT'])]
 masDat=read_df()
+st.dataframe(masDat.head(10))
+
 st.success('Read Data Success')
 
 # PLOT DESCRIPTION

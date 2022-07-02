@@ -40,7 +40,7 @@ with st.expander("DATA PREPARATION : ", expanded=True):
             
 @st.cache(suppress_st_warning=True)
 def read_df():
-    masDat=pd.read_excel(apiKey + keyDriveData)
+    masDat=pd.read_csv(apiKey + keyDriveData,sep=";")
     masDat=masDat.apply(lambda x: x.astype(str).str.upper())
     return masDat[~masDat['Category'].isin(['LAND',
                                             'BUILDING IMPROVEMENT',
@@ -210,7 +210,7 @@ with st.expander("PREDICTION FROM DATA :"):
         if submittedData:
             @st.cache(suppress_st_warning=True)
             def read_pred():
-                return pd.read_excel(apiKeyPred+textToBePred)
+                return pd.read_csv(apiKeyPred+textToBePred,sep=";")
             dataToPred=read_pred()
             dataToPred=dataToPred.apply(lambda x: x.astype(str).str.upper())
             

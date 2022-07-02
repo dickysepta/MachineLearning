@@ -43,7 +43,7 @@ with st.expander("DATA PREPARATION : ", expanded=True):
             if submittedData:
                 st.write("Start Processing..")
             
-@st.cache(suppress_st_warning=True)
+@st.cache()
 def read_df():
     masDat=pd.read_csv(apiKey + keyDriveData,sep=";",engine="python",encoding = "ISO-8859-1")
     masDat=masDat.apply(lambda x: x.astype(str).str.upper())
@@ -56,7 +56,6 @@ masDat=read_df()
 st.success('Read Data Success')
 
 # PLOT DESCRIPTION
-@st.cache(suppress_st_warning=True)
 def gb_Data():
     return masDat.groupby(['Category'])['Description'].count().reset_index()
 gbDat=gb_Data()
@@ -71,7 +70,6 @@ pltDat=px.bar(gbDat.sort_values(by="Description",
 st.success('Plotting Description Success')
 
 # FACTORIZE
-@st.cache(suppress_st_warning=True)
 def fact_Data():
     factDat = masDat[pd.notnull(masDat['Description'])]
     factDat.columns = ['Description', 'Category']

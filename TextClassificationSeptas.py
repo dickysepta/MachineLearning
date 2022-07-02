@@ -51,7 +51,7 @@ def read_df():
                                             'MACHINERY',
                                             'FACTORY EQUIPMENT'])]
 masDat=read_df()
-st.success('Read Data Successfully....')
+st.success('Read Data Success')
 
 # PLOT DESCRIPTION
 @st.cache(suppress_st_warning=True)
@@ -66,6 +66,8 @@ pltDat=px.bar(gbDat.sort_values(by="Description",
                title="PROFILE DATA",
                height=500)
 
+st.success('Plotting Description Success')
+
 # FACTORIZE
 @st.cache(suppress_st_warning=True)
 def fact_Data():
@@ -76,7 +78,6 @@ def fact_Data():
 factDat=fact_Data()
 
 #SET CATEGORY ID
-
 category_id_df = factDat[['Category', 'category_id']].drop_duplicates().sort_values('category_id')
 category_to_id = dict(category_id_df.values)
 id_to_category = dict(category_id_df[['category_id', 'Category']].values)
@@ -99,10 +100,10 @@ for Product, category_id in sorted(category_to_id.items()):
     #print("# '{}':".format(Product))
     #print("  . Most correlated unigrams:\n. {}".format('\n. '.join(unigrams[-N:])))
     #print("  . Most correlated bigrams:\n. {}".format('\n. '.join(bigrams[-N:])))
-    
+
+st.success('Preparation Models Success')
     
 #SPLIT DATA TRAINING & TESTING
-
 X_train, X_test, y_train, y_test = train_test_split(factDat['Description'], factDat['Category'], random_state = 0)
 count_vect = CountVectorizer()
 X_train_counts = count_vect.fit_transform(X_train)
@@ -131,6 +132,8 @@ for model in models:
     for fold_idx, accuracy in enumerate(accuracies):
         entries.append((model_name, fold_idx, accuracy))
 cv_df = pd.DataFrame(entries, columns=['model_name', 'fold_idx', 'accuracy'])
+
+st.success('Data Modelling Success')
 
 # PLOTING EVALUATION MODEL
 bxPlotEvMod = px.box(cv_df, x='model_name', y='accuracy', points="all", color="model_name")
@@ -161,6 +164,7 @@ pltModAccuracy=px.bar(modelAccuracy,
                    barmode="group",
                    text_auto=True)
 
+st.success('Setup Accuration Success')
 
 # VISUALIZAITON STREAMLIT
 with st.expander("DATA PROFILE : "):
@@ -229,4 +233,3 @@ with st.expander("PREDICTION FROM DATA :"):
             st.subheader("Prediction Data Result")
             st.subheader("Best Models : " + bestModels)
             st.dataframe(dataToPred)
-            

@@ -51,7 +51,6 @@ def read_df():
                                             'MACHINERY',
                                             'FACTORY EQUIPMENT'])]
 masDat=read_df()
-st.dataframe(masDat.head(10))
 
 st.success('Read Data Success')
 
@@ -112,13 +111,16 @@ X_train_counts = count_vect.fit_transform(X_train)
 tfidf_transformer = TfidfTransformer()
 X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
+st.success('Data Training Testing Split Success')
+
 # FIT MODELS NAIVE BAYES DKK
 clf_NaiveBayes = MultinomialNB().fit(X_train_tfidf, y_train)
 clf_LinearSVC = LinearSVC().fit(X_train_tfidf, y_train)
 clf_LogisticRegression = LogisticRegression().fit(X_train_tfidf, y_train)
 clf_RandomForest = RandomForestClassifier().fit(X_train_tfidf, y_train)
+st.success('Fit Models Success')
 
-    # GENERATE EVALUATION MODEL
+# GENERATE EVALUATION MODEL
 models = [
     RandomForestClassifier(n_estimators=200, max_depth=3, random_state=0),
     LinearSVC(),

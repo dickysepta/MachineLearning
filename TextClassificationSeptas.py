@@ -6,6 +6,7 @@ import seaborn as sns
 import datetime
 import streamlit as st
 import plotly.express as px
+import warnings
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -14,6 +15,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import cross_val_score
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 st.set_page_config(page_title='TextClassificationSeptas')
 st.title("!! TEXT CLASSIFICATION FOR FREE !!")
